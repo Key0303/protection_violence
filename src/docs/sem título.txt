@@ -1,0 +1,226 @@
+Claro! Vou fornecer um guia passo a passo prático para configurar sua aplicação web de cadastro e consulta usando HTML, PHP e MySQL com XAMPP.
+
+### Estrutura do Diretório
+
+Vamos criar uma pasta chamada `denuncias_site` dentro do diretório `htdocs` do XAMPP. A estrutura será a seguinte:
+
+```
+C:\xampp\htdocs\denuncias_site\
+    |-- index.html
+    |-- register.php
+    |-- consulta.php
+    |-- styles1.css
+```
+
+### Passo 1: Criar o Formulário de Cadastro (`index.html`)
+
+Crie o arquivo `index.html` na pasta `denuncias_site` com o seguinte conteúdo:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro - Site de Denúncias</title>
+    <link rel="stylesheet" href="styles1.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Cadastrar</h1>
+        <form id="register-form" action="register.php" method="POST">
+            <input type="text" name="username" placeholder="Usuário" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Senha" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <p>Já tem uma conta? <a href="login.html">Login</a></p>
+        <p><a href="consulta.php">Ver usuários cadastrados</a></p>
+    </div>
+</body>
+</html>
+```
+
+### Passo 2: Criar o Script de Registro (`register.php`)
+
+Crie o arquivo `register.php` na pasta `denuncias_site` com o seguinte conteúdo:
+
+```php
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "site_denuncias";
+
+// Criar conexão
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar conexão
+if ($conn->connect_error) 
+{
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Receber os dados do formulário
+$user = $_POST['username'];
+$email = $_POST['email'];
+$pass = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash da senha
+
+// Inserir os dados na tabela
+$sql = "INSERT INTO usuarios (username, email, password) VALUES ('$user', '$email', '$pass')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Cadastro realizado com sucesso!<br>";
+    echo "<a href='index.html'>Cadastrar outro usuário</a><br>";
+    echo "<a href='consulta.php'>Ver usuários cadastrados</a>";
+} else {
+    echo "Erro: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
+?>
+```
+
+### Passo 3: Criar o Script de Consulta (`consulta.php`)
+
+Crie o arquivo `consulta.php` na pasta `denuncias_site` com o seguinte conteúdo:
+
+```php
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "site_denuncias";
+
+// Criar conexão
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar conexão
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Consultar os dados da tabela
+$sql = "SELECT id, username, email FROM usuarios";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo "<table border='1'>
+            <tr>
+                <th>ID</th>
+                <th>Usuário</th>
+                <th>Email</th>
+            </tr>";
+    while($row = $result->fetch_assoc()) {
+        echo "<tr>
+                <td>" . $row["id"]. "</td>
+                <td>" . $row["username"]. "</td>
+                <td>" . $row["email"]. "</td>
+              </tr>";
+    }
+    echo "</table>";
+} else {
+    echo "0 results";
+}
+$conn->close();
+?>
+```
+
+### Passo 4: Criar a Tabela no Banco de Dados
+
+1. **Acessar o phpMyAdmin:**
+   - Abra o navegador e vá para `http://localhost/phpmyadmin`.
+
+2. **Criar a base de dados:**
+   - Clique em `Novo` no painel esquerdo.
+   - Nomeie a base de dados como `site_denuncias` e clique em `Criar`.
+
+3. **Criar a tabela `usuarios`:**
+   - Selecione a base de dados `site_denuncias`.
+   - Clique em `SQL` e insira o seguinte código SQL:
+
+```sql
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+```
+
+### Passo 5: Testar a Aplicação
+
+1. **Acessar o formulário de cadastro:**
+   - No navegador, vá para `http://localhost/denuncias_site/index.html`.
+
+2. **Cadastrar um usuário:**
+   - Preencha o formulário e clique em "Cadastrar".
+   - Após o cadastro, você deve ver a mensagem "Cadastro realizado com sucesso!" e os links para cadastrar outro usuário ou ver os usuários cadastrados.
+
+3. **Consultar os dados:**
+   - Clique no link "Ver usuários cadastrados" ou acesse diretamente `http://localhost/denuncias_site/consulta.php` no navegador para ver os dados cadastrados.
+
+### CSS Opcional (`styles1.css`)
+
+Se desejar estilizar sua página, você pode adicionar um arquivo CSS chamado `styles1.css` na pasta `denuncias_site` com o seguinte conteúdo:
+
+```css
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.login-container h1 {
+    margin-bottom: 20px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #218838;
+}
+
+.login-container p {
+    margin: 10px 0;
+}
+
+.login-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+```
+
+Com esses arquivos configurados, você terá um sistema de cadastro e consulta de usuários funcional usando XAMPP, HTML, PHP e MySQL.

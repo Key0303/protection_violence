@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cadastro - Site de Denúncias</title>
+    <link rel="stylesheet" href="css/styles1.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="brand-login">
+        <img src="../images/logo.svg" alt="Protection Violence Logo " />
+      </div>
+      <h1>Cadastrar</h1>
+      <form id="register-form" action="cadastro.php" method="POST">
+        <div class="input-box">
+          <i class="ph ph-user"></i>
+          <input type="text" name="username" placeholder="Usuário" required />
+        </div>
+
+        <div class="input-box">
+          <i class="ph ph-at"></i>
+          <input type="email" name="email" placeholder="Email" required />
+        </div>
+        <div class="input-box">
+          <i class="ph ph-lock"></i>
+          <input type="password" name="password" placeholder="Senha" required />
+        </div>
+        <button type="submit">Cadastrar</button>
+      </form>
+      <div class="login-info">
+        <p>Já tem uma conta? <a href="login.html">Login</a></p>
+        <p><a href="/" id="visitorLink">Continuar como visitante</a></p>
+      </div>
+    </div>
+  </body>
+</html>

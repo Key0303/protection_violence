@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Site de Denúncias</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles_img.css">
+
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="overlay1" id="loginOverlay">
+        <div class="login-container">
+            <h1>Login</h1>
+            <form id="login-form" action="login.php" method="POST">
+                <input type="text" name="username" placeholder="Usuário" required>
+                <input type="password" name="password" placeholder="Senha" required>
+                <button type="submit">Login</button>
+            </form>
+            <p>Não tem uma conta? <a href="cadastro.html">Cadastrar</a></p>
+            <p><a href="#" id="visitorLink">Entrar como visitante</a></p>
+        </div>
+    </div>
+
+    <section id="logo">
+        <img src="logo.jpg">
+        <h1>Protection violence</h1>
+    </section>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="denuncia.html">Denunciar</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="login.html" id="loginLink">Login</a></li>
+                <li><a href="cadastro.html">Cadastrar</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="texto">
+        <h1>Bem-vindo ao Site de Denúncias</h1>
+        <p>Você pode fazer sua denúncia <a href="denuncia.html">aqui</a>.</p>
+    </section>
+  
+    <div class="content">              
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="images/image1.jpg" style="width:90%">
+            </div>
+            <div class="mySlides fade">
+                <img src="images/image2.jpg" style="width:90%">
+            </div>
+            <div class="mySlides fade">
+                <img src="images/image3.jpg" style="width:90%">
+            </div>
+            <div class="mySlides fade">
+                <img src="images/image4.jpg" style="width:90%">
+            </div>
+            <div class="mySlides fade">
+                <img src="images/image5.jpg" style="width:90%">
+            </div>
+           
+           <!-- <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>-->
+        </div>
+        <br>
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+        </div>
+    </div>
+    
+    <!-- imagens de nuticias-->
+    <div class="image-grid">
+        <div class="container">
+            <div class="image-container">
+                <img src="images/image2.jpg" alt="Imagem 1">
+                <div class="overlay">
+                    <div class="text">Jovem abandonada pelos pais passa necessidades basicas</div>
+                </div>
+            </div>
+            <div class="image-container">
+                <img src="images/image3.jpg" alt="Imagem 2">
+                <div class="overlay">
+                    <div class="text">Violencia domestica em destaque: Mulher agredida constantemente pelo marido!</div>
+                </div>
+            </div>
+            <div class="image-container">
+                <img src="images/image4.jpg" alt="Imagem 3">
+                <div class="overlay">
+                    <div class="text">Texto 3</div>
+                </div>
+            </div>
+            <div class="image-container">
+                <img src="images/image5.jpg" alt="Imagem 3">
+                <div class="overlay">
+                    <div class="text">Texto 3</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>© 2024 Site de Denúncias. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

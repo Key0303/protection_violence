@@ -1,0 +1,8 @@
+### Instruções para Configuração
+
+1. **Crie o banco de dados e a tabela** usando o script `setup.sql`.
+2. **Atualize `config.php`** com suas credenciais do banco de dados.
+3. **Coloque todos os arquivos** em um servidor web que suporte PHP e MySQL (por exemplo, dentro do diretório `htdocs` do XAMPP).
+4. **Acesse `index.html`** no navegador para visualizar o formulário de denúncias.
+5. **Acesse `login.php`** para fazer login como administrador (usuário: `admin`, senha: `admin123`).
+6. **Após o login**, você será redirecionado para `admin.php

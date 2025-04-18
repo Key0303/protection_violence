@@ -1,0 +1,109 @@
+Para configurar a funcionalidade de login no seu site usando XAMPP e MySQL, você precisa criar um script PHP que valide as credenciais do usuário comparando-as com as informações armazenadas no banco de dados. Aqui estão os passos:
+
+### Passo 1: Configurar o Banco de Dados e a Tabela
+
+Já temos a tabela `usuarios` configurada no banco de dados `site_denuncias`. Esta tabela contém os campos `id`, `username`, `email`, e `password`.
+
+### Passo 2: Criar o Formulário de Login
+
+Vamos usar o arquivo `login.html` que você forneceu. Aqui está um exemplo de como ele pode ser estruturado:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Site de Denúncias</title>
+    <link rel="stylesheet" href="styles1.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form id="login-form" action="login.php" method="POST">
+            <input type="text" name="username" placeholder="Usuário" required>
+            <input type="password" name="password" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+        </form>
+        <p>Não tem uma conta? <a href="denuncia.html">Cadastrar</a></p>
+    </div>
+</body>
+</html>
+```
+
+### Passo 3: Criar o Script PHP para Processar o Login
+
+Crie o arquivo `login.php` na pasta do seu projeto (ex.: `C:\xampp\htdocs\seu_projeto\login.php`) com o seguinte conteúdo:
+
+```php
+<?php
+$servername = "localhost";
+$username = "root";
+$password = ""; // Adicione a senha do MySQL aqui se tiver configurado uma
+$dbname = "site_denuncias";
+
+// Criar conexão
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar conexão
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Receber os dados do formulário
+$user = $_POST['username'];
+$pass = $_POST['password'];
+
+// Verificar as credenciais
+$sql = "SELECT id, password FROM usuarios WHERE username = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $user);
+$stmt->execute();
+$stmt->store_result();
+
+if ($stmt->num_rows > 0) {
+    $stmt->bind_result($id, $hashed_password);
+    $stmt->fetch();
+    
+    if (password_verify($pass, $hashed_password)) {
+        echo "Login realizado com sucesso!<br>";
+        echo "<a href='denuncia.html'>Voltar à página inicial</a>";
+    } else {
+        echo "Senha incorreta. Tente novamente.<br>";
+        echo "<a href='login.html'>Voltar ao login</a>";
+    }
+} else {
+    echo "Usuário não encontrado. Tente novamente.<br>";
+    echo "<a href='login.html'>Voltar ao login</a>";
+}
+
+$stmt->close();
+$conn->close();
+?>
+```
+
+### Passo 4: Testar o Formulário de Login
+
+1. **Acesse a Página de Login:**
+   - Abra o navegador e vá para `http://localhost/seu_projeto/login.html`.
+
+2. **Preencha o Formulário e Submeta:**
+   - Preencha o formulário de login com um nome de usuário e senha válidos e clique em "Entrar".
+   - Se as credenciais estiverem corretas, você verá uma mensagem de sucesso.
+
+### Estrutura do Projeto
+
+Certifique-se de que a estrutura do seu projeto esteja correta. A pasta do projeto (`C:\xampp\htdocs\seu_projeto\`) deve conter:
+
+- `denuncia.html`: O formulário de cadastro.
+- `login.html`: O formulário de login.
+- `register.php`: O script PHP para registrar usuários.
+- `login.php`: O script PHP para processar o login.
+- `styles1.css`: O arquivo de estilos CSS (se houver).
+- `consulta.php`: (Opcional) Um arquivo PHP para visualizar os usuários cadastrados.
+
+### Teste Completo
+
+- **Cadastro:** Acesse `http://localhost/seu_projeto/denuncia.html` para cadastrar um novo usuário.
+- **Login:** Acesse `http://localhost/seu_projeto/login.html` para fazer login com o usuário recém-cadastrado.
+
+Seguindo esses passos, você terá configurado um sistema básico de login para o seu site de denúncias usando XAMPP e MySQL. Se houver algum problema específico ou mensagem de erro, informe para que eu possa ajudar mais detalhadamente.
