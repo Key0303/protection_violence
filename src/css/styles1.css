@@ -150,10 +150,10 @@ button:hover {
   margin-top: 1rem;
 }
 
-.login-info p a,
-.login-info p {
-  font-size: 0.8rem;
-  color: #333;
+.form-info p a,
+.form-info p {
+  font-size: 1rem;
+  color: var(--terteary);
   cursor: pointer;
 }
 .container .input-box input[type="radio"] {
