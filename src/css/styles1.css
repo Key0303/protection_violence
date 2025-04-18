@@ -106,9 +106,23 @@ button:hover {
 .container form {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
   width: 100%;
 }
 
+.container form .select-box {
+  width: 100%;
+
+}
+.container form .textarea-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.textarea-box textarea{
+  width: 100% !important;
+}
 .container .prova {
   display: flex;
   flex-direction: column;
@@ -117,6 +131,7 @@ button:hover {
 }
 
 .container form .prova .input-box {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 0.5rem;
