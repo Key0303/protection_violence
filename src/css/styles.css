@@ -502,16 +502,6 @@ footer {
   background-color: #717171;
 }
 
-/* On small screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .prev,
-  .next,
-  .text {
-    font-size: 11px;
-    color: #fff;
-    padding: 1rem 0;
-  }
-}
 
 header nav {
   display: flex;
@@ -665,14 +655,24 @@ footer {
 .login-container form button {
   padding: 0.5rem;
   border: none;
-  background-color: #333;
+  background-color: var(--terteary);
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
+  transition: all ease .3s;
+  -webkit-transition: all ease .3s;
+  -moz-transition: all ease .3s;
+  -ms-transition: all ease .3s;
+  -o-transition: all ease .3s;
 }
 
 .login-container form button:hover {
-  background-color: rgba(5, 121, 25, 0.685);
+  background-color: #d3712fcc;
+  transform: scale(1.02);
+  -webkit-transform: scale(1.02);
+  -moz-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  -o-transform: scale(1.02);
 }
 
 .login-container p {
@@ -761,5 +761,15 @@ footer {
   .next,
   .text {
     font-size: 11px;
+  }
+}
+/* On small screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev,
+  .next,
+  .text {
+    font-size: 11px;
+    color: #fff;
+    padding: 1rem 0;
   }
 }
