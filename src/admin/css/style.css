@@ -1,0 +1,72 @@
+
+      body {
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            padding-top: 20px;
+            background-color: #9b59b6; /* Cor lilás para o fundo */
+        }
+
+        .sidebar .nav-link {
+            color: #fff; /* Cor do texto dos links na sidebar */
+        }
+
+        .sidebar .nav-link:hover {
+            color: #f1e5f1; /* Cor do texto ao passar o mouse */
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        /* Ajustando o tamanho da tabela para caber bem na tela */
+        .table th, .table td {
+            vertical-align: middle;
+        }
+
+        /* Estilo personalizado para os botões da tabela */
+        .btn-sm {
+            font-size: 14px;
+        }
+
+        .badge {
+            font-size: 12px;
+        }
+
+        /* Estilo do botão de "Adicionar Denúncia" */
+        .btn-primary {
+            margin-top: 20px;
+        }
+
+        /* Estilo da Navbar (barra superior) */
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar-brand {
+            color: #fff !important;
+        }
+
+        .navbar .navbar-nav .nav-item .nav-link {
+            color: #fff !important;
+        }
+
+        .navbar .navbar-nav .nav-item .nav-link:hover {
+            color: #ffc107 !important;
+        }
+
+        /* Estilo do botão de "Sair" na parte superior direita da Navbar */
+        .btn-logout {
+            margin-left: auto;
+            margin-right: 20px;
+            margin-top: 20px;
+            display: block;
+            width: 90%;
+        }
