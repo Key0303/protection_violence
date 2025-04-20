@@ -11,22 +11,27 @@
       <div class="brand-login">
         <img src="../images/logo.svg" alt="Protection Violence Logo " />
       </div>
-      <h1>Cadastrar</h1>
-      <form id="register-form" action="cadastro.php" method="POST">
+      <h1>Cadastrar-se</h1>
+      <form id="register-form"  method="POST">
         <div class="input-box">
           <i class="ph ph-user"></i>
-          <input type="text" name="fullname" placeholder="João Domingos" required />
+          <input type="text" name="nomecompleto" placeholder="Nome completo" required />
         </div>
 
         <div class="input-box">
           <i class="ph ph-at"></i>
-          <input type="email" name="email" placeholder="exemple@gmail.cpm" required />
+          <input type="email" name="email" placeholder="email" required />
         </div>
+
         <div class="input-box">
           <i class="ph ph-lock"></i>
-          <input type="password" name="password" placeholder="@joao002._" required />
+          <input type="password" name="Senha" placeholder="Insira a sua Senha" required />
+        </div><div class="input-box">
+          <i class="ph ph-lock"></i>
+          <input type="password" name="confirmarSenha" placeholder="Insira novamente a senha para confirmar" required />
         </div>
-        <button type="submit">Cadastrar</button>
+
+        <button type="submit" name="Cadastrar">Cadastrar</button>
       </form>
       <div class="login-info">
         <p>Já tem uma conta? <a href="login.html">Login</a></p>
