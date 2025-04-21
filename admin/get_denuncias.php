@@ -2,7 +2,7 @@
 include 'includes/config.php';
 
 $sql = "SELECT * FROM denuncias ORDER BY id DESC";
-$result = $conn->query($sql);
+$result = $conexao->query($sql);
 
 $dados = [];
 while ($row = $result->fetch_assoc()) {
