@@ -2,13 +2,13 @@
 include('includes/config.php');
 
 $msg = "";
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_POST)) {
     $nome = trim($_POST['nomecompleto']);
     $email = trim($_POST['email']);
     $mensagem = trim($_POST['mensagem']);
 
     if (!empty($nome) && !empty($email) && !empty($mensagem)) {
-        $stmt = $pdo->prepare("INSERT INTO mensagens_contato (nome, email, mensagem) VALUES (?, ?, ?)");
+        $stmt = $conexao->prepare("INSERT INTO mensagens_contato (nome, email, mensagem) VALUES (?, ?, ?)");
         if ($stmt->execute([$nome, $email, $mensagem])) {
             $msg = "Mensagem enviada com sucesso!";
         } else {

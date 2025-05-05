@@ -9,7 +9,7 @@ if (!isLoggedIn()) {
 }
 
 // Obter as denúncias do banco de dados
-$denuncias = getDenuncias($pdo);
+$denuncias = getDenuncias($conexao);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
