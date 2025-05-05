@@ -6,7 +6,7 @@ $msg = "";
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = intval($_GET['id']);
-    $stmt = $pdo->prepare("SELECT d.id, d.descricao, d.status, d.data_envio, c.nome AS categoria
+    $stmt = $conexao->prepare("SELECT d.id, d.descricao, d.status, d.data_envio, c.nome AS categoria
                            FROM denuncias d
                            JOIN categoria c ON d.categoria_id = c.id
                            WHERE d.id = ?");
