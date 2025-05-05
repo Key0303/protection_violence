@@ -23,7 +23,7 @@ session_start();
         <!-- Verifica se o usuário está logado -->
         <?php if (isset($_SESSION['user_id'])): ?>
           <!-- Se estiver logado, exibe a opção de logout -->
-          <li class="nav-item"><a class="" href="logout.php">Terminar Sessão</a></li>
+          <li class="nav-item"><a class="" href="sair.php">Terminar Sessão</a></li>
         <?php else: ?>
           <!-- Se não estiver logado, exibe o link de login -->
           <li class="nav-item"><a class="" href="login.php" id="loginLink">Login</a></li>

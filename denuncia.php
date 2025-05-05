@@ -2,7 +2,7 @@
 session_start();
 include('includes/config.php'); // Conexão PDO com $pdo
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($_POST)) {
     $categoria = $_POST['categoria'];
     $descricao = $_POST['descricao'];
     $anonima = isset($_POST['anonima']) ? (int) $_POST['anonima'] : 0;
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Inserir a denúncia
-    $stmt = $pdo->prepare("INSERT INTO denuncias (usuario_id, titulo, descricao, categoria_id, anonima, status)
+    $stmt = $conexao->prepare("INSERT INTO denuncias (usuario_id, titulo, descricao, categoria_id, anonima, status)
     VALUES (:usuario_id, :titulo, :descricao, 
                                   (SELECT id FROM categorias WHERE nome = :categoria), :anonima, 'pendente')");
     $stmt->execute([
@@ -33,22 +33,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ':anonima' => $anonima
     ]);
 
-    $denuncia_id = $pdo->lastInsertId();
+    $denuncia_id = $conexao->lastInsertId();
 
-    if ($prova_caminho) {
-        $pdo->exec("CREATE TABLE IF NOT EXISTS provas (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            denuncia_id INT NOT NULL,
-            caminho_arquivo VARCHAR(255) NOT NULL,
-            FOREIGN KEY (denuncia_id) REFERENCES denuncias(id) ON DELETE CASCADE
-        )");
-
-        $stmt_prova = $pdo->prepare("INSERT INTO provas (denuncia_id, caminho_arquivo) VALUES (?, ?)");
+  
+        $stmt_prova = $conexao->prepare("INSERT INTO provas (denuncia_id, caminho_arquivo) VALUES (?, ?)");
         $stmt_prova->execute([$denuncia_id, $prova_caminho]);
     }
 
     echo "<script>alert('Denúncia enviada com sucesso!'); window.location='home.php';</script>";
-}
+
 ?>
 
 <!DOCTYPE html>

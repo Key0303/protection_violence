@@ -1,28 +1,26 @@
 <?php
 session_start();
-include('includes/config.php'); // Conexão PDO com $pdo
+include('includes/config.php'); 
 
-// Verifica se o formulário foi submetido
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($_POST)) {
     $nomeusuario = $_POST['nomeusuario'];
     $senha = $_POST['Senha'];
 
-    // Consultar o banco de dados para verificar as credenciais
-    $stmt = $pdo->prepare("SELECT id, senha FROM usuarios WHERE nome = :nomeusuario");
+   
+    $stmt = $conexao->prepare("SELECT id, senha FROM usuarios WHERE nome = :nomeusuario");
     $stmt->execute([':nomeusuario' => $nomeusuario]);
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Se o usuário existe e a senha está correta
     if ($usuario && password_verify($senha, $usuario['senha'])) {
-        // Cria uma sessão para o usuário logado
+     
         $_SESSION['user_id'] = $usuario['id'];
         $_SESSION['user_nome'] = $nomeusuario;
         
-        // Redireciona para a página inicial após login
+
         header("Location: home.php");
         exit;
     } else {
-        // Se as credenciais não forem válidas
+       
         $erro = "Nome de usuário ou senha incorretos!";
     }
 }
