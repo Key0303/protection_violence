@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Inserir a denúncia
     $stmt = $pdo->prepare("INSERT INTO denuncias (usuario_id, titulo, descricao, categoria_id, anonima, status)
-                           VALUES (:usuario_id, :titulo, :descricao, 
+    VALUES (:usuario_id, :titulo, :descricao, 
                                   (SELECT id FROM categorias WHERE nome = :categoria), :anonima, 'pendente')");
     $stmt->execute([
         ':usuario_id' => $anonima ? null : $usuario_id,
