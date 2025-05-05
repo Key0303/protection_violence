@@ -2,7 +2,7 @@
 session_start();
 include('includes/config.php'); // Deve conter a conexão PDO
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($_POST)) {
     // Corrige os nomes dos campos do formulário
     $nomecompleto = $_POST['nomecompleto'];
     $email = $_POST['email'];
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         try {
             // Verifica se o e-mail já existe
-            $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = ?");
+            $stmt = $conexao->prepare("SELECT id FROM usuarios WHERE email = ?");
             $stmt->execute([$email]);
 
             if ($stmt->rowCount() > 0) {
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $senha_cripto = password_hash($senha, PASSWORD_DEFAULT);
 
                 // Inserir o novo usuário
-                $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)");
+                $stmt = $conexao->prepare("INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)");
                 $stmt->execute([$nomecompleto, $email, $senha_cripto]);
 
                 echo "<script>alert('Cadastro realizado com sucesso!'); window.location='login.php';</script>";
