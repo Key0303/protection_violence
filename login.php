@@ -9,18 +9,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nomeusuario = $_POST['nomeusuario'];
         $senha = $_POST['Senha'];
 
-        // Prepara a consulta para verificar se o usuário existe
-        $stmt = $conexao->prepare("SELECT id, senha FROM usuarios WHERE nome = :nomeusuario");
+        // Prepara a consulta para verificar se o usuário existe e obter o tipo
+        $stmt = $conexao->prepare("SELECT id, senha, tipo FROM usuarios WHERE nome = :nomeusuario");
         $stmt->execute([':nomeusuario' => $nomeusuario]);
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Verifica se o usuário existe e a senha é válida
         if ($usuario && password_verify($senha, $usuario['senha'])) {
-            // Se tudo estiver correto, cria a sessão e redireciona para a home
+            // Depuração - Verifique os valores
+            var_dump($usuario);  // Dados do usuário
+            var_dump($senha);     // Senha inserida
+            var_dump($usuario['senha']); // Senha armazenada no banco
+
+            // Se tudo estiver correto, cria a sessão
             $_SESSION['user_id'] = $usuario['id'];
             $_SESSION['user_nome'] = $nomeusuario;
+            $_SESSION['user_tipo'] = $usuario['tipo'];  // Salva o tipo do usuário na sessão
 
-            header("Location: home.php");
+            // Verifica o tipo de usuário para redirecionamento
+            if ($usuario['tipo'] === 'admin') {
+                header("Location: admin/painel.php");  // Redireciona para o painel do admin
+            } else {
+                header("Location: home.php");  // Redireciona para a home de usuário normal
+            }
             exit;
         } else {
             // Caso haja erro, exibe a mensagem de erro
@@ -34,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8" />
-    <title>Cadastro - Site de Denúncias</title>
+    <title>Login - Site de Denúncias</title>
     <link rel="stylesheet" href="css/styles1.css" />
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 </head>
@@ -55,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="error-message"><?php echo $erro; ?></div>
         <?php endif; ?>
 
-        <form id="register-form" method="POST">
+        <form method="POST">
             <div class="input-box">
                 <i class="ph ph-user"></i>
                 <input type="text" name="nomeusuario" placeholder="Nome de Usuário" required />
@@ -66,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="password" name="Senha" placeholder="Insira a sua Senha" required />
             </div>
 
-            <button type="submit" name="Entrar">Entrar</button>
+            <button type="submit">Entrar</button>
         </form>
 
         <div class="login-info">
@@ -76,4 +87,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </body>
 </html>
-
