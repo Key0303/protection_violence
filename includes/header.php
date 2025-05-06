@@ -71,4 +71,23 @@ session_start();
         </div>
       </div>
     </section>
+
+    <script>
+  var swiper = new Swiper('.swiper', {
+    loop: true,
+    autoplay: {
+      delay: 2000,  // Tempo de transição entre os slides
+      disableOnInteraction: false, // A transição continua mesmo após a interação do usuário
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  });
+</script>
+
 </header>

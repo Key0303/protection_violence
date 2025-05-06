@@ -2,26 +2,30 @@
 session_start();
 include('includes/config.php'); 
 
-if (isset($_POST)) {
-    $nomeusuario = $_POST['nomeusuario'];
-    $senha = $_POST['Senha'];
+// Verifica se o formulário foi enviado via POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verifica se os campos 'nomeusuario' e 'Senha' foram preenchidos
+    if (isset($_POST['nomeusuario']) && isset($_POST['Senha'])) {
+        $nomeusuario = $_POST['nomeusuario'];
+        $senha = $_POST['Senha'];
 
-   
-    $stmt = $conexao->prepare("SELECT id, senha FROM usuarios WHERE nome = :nomeusuario");
-    $stmt->execute([':nomeusuario' => $nomeusuario]);
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Prepara a consulta para verificar se o usuário existe
+        $stmt = $conexao->prepare("SELECT id, senha FROM usuarios WHERE nome = :nomeusuario");
+        $stmt->execute([':nomeusuario' => $nomeusuario]);
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($usuario && password_verify($senha, $usuario['senha'])) {
-     
-        $_SESSION['user_id'] = $usuario['id'];
-        $_SESSION['user_nome'] = $nomeusuario;
-        
+        // Verifica se o usuário existe e a senha é válida
+        if ($usuario && password_verify($senha, $usuario['senha'])) {
+            // Se tudo estiver correto, cria a sessão e redireciona para a home
+            $_SESSION['user_id'] = $usuario['id'];
+            $_SESSION['user_nome'] = $nomeusuario;
 
-        header("Location: home.php");
-        exit;
-    } else {
-       
-        $erro = "Nome de usuário ou senha incorretos!";
+            header("Location: home.php");
+            exit;
+        } else {
+            // Caso haja erro, exibe a mensagem de erro
+            $erro = "Nome de usuário ou senha incorretos!";
+        }
     }
 }
 ?>
@@ -47,6 +51,7 @@ if (isset($_POST)) {
         <h1>Entrar</h1>
 
         <?php if (isset($erro)): ?>
+            <!-- Exibe a mensagem de erro apenas se o formulário for enviado e houver falha -->
             <div class="error-message"><?php echo $erro; ?></div>
         <?php endif; ?>
 
@@ -71,3 +76,4 @@ if (isset($_POST)) {
     </div>
 </body>
 </html>
+
