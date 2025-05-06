@@ -51,14 +51,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="dashboard.html">
+                            <a class="nav-link" href="dashboard.php">
                                 <i class="bi bi-file-earmark-text"></i>
                                 Inicio
                             </a>
                         </li>
                       
                         <li class="nav-item">
-                            <a class="nav-link" href="denuncias.html">
+                            <a class="nav-link" href="denuncias.php">
                                 <i class="bi bi-file-earmark-text"></i>
                                 Denúncias
                             </a>
