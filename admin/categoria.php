@@ -3,11 +3,6 @@ session_start();
 include('includes/config.php');
 
 // Verifica se o usuário está logado e é um administrador
-if (!isset($_SESSION['user_id']) || $_SESSION['user_tipo'] !== 'admin') {
-    header("Location: login.php");
-    exit;
-}
-
 // Adicionar nova categoria
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['nova_categoria'])) {
     $nova_categoria = trim($_POST['nova_categoria']);
