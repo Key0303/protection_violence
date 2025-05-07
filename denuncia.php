@@ -93,13 +93,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="categoria">Categoria:</label>
         <select id="categoria" name="categoria" required>
           <option value="">Selecione</option>
-          <option value="Corrupção">Corrupção</option>
-          <option value="Assédio">Assédio</option>
-          <option value="Fraude">Fraude</option>
-          <option value="Roubo">Roubo</option>
-          <option value="Burla">Burla</option>
-          <option value="Abandono">Abandono</option>
-          <option value="Outro">Outro</option>
+          <?php
+          // Busca as categorias do banco de dados
+          $stmt_categorias = $conexao->prepare("SELECT nome FROM categorias");
+          $stmt_categorias->execute();
+          $categorias = $stmt_categorias->fetchAll(PDO::FETCH_ASSOC);
+
+          // Exibe as opções de categoria
+          foreach ($categorias as $categoria) {
+              echo "<option value='{$categoria['nome']}'>{$categoria['nome']}</option>";
+          }
+          ?>
         </select>
       </div>
 
@@ -132,4 +136,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 </body>
 </html>
-

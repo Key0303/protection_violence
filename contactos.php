@@ -2,7 +2,7 @@
 include('includes/config.php');
 
 $msg = "";
-if (isset($_POST)) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {  // Verifica se o método POST foi usado
     $nome = trim($_POST['nomecompleto']);
     $email = trim($_POST['email']);
     $mensagem = trim($_POST['mensagem']);

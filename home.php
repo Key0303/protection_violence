@@ -17,61 +17,51 @@
   <body>
     <?php include('includes/header.php'); ?>
 
-    <div class="container d-flex flex-row testimonial-section">
-        <h5 class="text-secondary">Vê o que os outros pensam sobre a violência</h5>
-        <h2 class="fw-bold">Testemunhos</h2>
-        <section class="testemunhos">
-            <div class="row justify-content-center">
-                <!-- Left Testimonial -->
-                <div class="col-md-4 d-flex justify-content-end">
-                    <div class="testimonial-card text-center">
-                        <p class="testimonial-text">
-                            "A nova OptinMonster com o back-end da web é simplesmente incrível. Fácil de usar e uma maneira muito eficaz de aumentar os inscritos."
-                        </p>
-                        <img
-                          src="https://randomuser.me/api/portraits/women/12.jpg"
-                          alt="Jane"
-                          class="profile-img"
-                        />
-                        <div class="testimonial-author">Jane Rowling</div>
-                        <div class="testimonial-role">Copywriter</div>
-                    </div>
-                </div>
-
-                <!-- Center Testimonial (Highlighted) -->
-                <div class="col-md-4 d-flex justify-content-center">
-                    <div class="testimonial-card main text-center">
-                        <p class="testimonial-text">
-                            "Eu era uma descrente! Não gostava de pop-ups. Mas dobramos nossas inscrições por e-mail. O OptinMonster facilita muito."
-                        </p>
-                        <img
-                          src="https://randomuser.me/api/portraits/women/18.jpg"
-                          alt="Emilia"
-                          class="profile-img"
-                        />
-                        <div class="testimonial-author">Emilia Bubu</div>
-                        <div class="testimonial-role">UI/UX Designer</div>
-                    </div>
-                </div>
-
-                <!-- Right Testimonial -->
-                <div class="col-md-4 d-flex justify-content-start">
-                    <div class="testimonial-card text-center">
-                        <p class="testimonial-text">
-                            "OptinMonster trouxe mais inscritos para mim. Configurá-lo foi tranquilo e excelente! Eu amo o produto e as pessoas por trás dele."
-                        </p>
-                        <img
-                          src="https://randomuser.me/api/portraits/women/22.jpg"
-                          alt="Judy"
-                          class="profile-img"
-                        />
-                        <div class="testimonial-author">Judy Dawson</div>
-                        <div class="testimonial-role">PHP Developer</div>
-                    </div>
+    <div class="container testimonial-section mt-3 mb-5">
+    <h5 class="text-secondary text-center mb-3">Vê o que os outros pensam sobre a violência</h5>
+    <h2 class="fw-bold text-center mb-4">Testemunhos</h2>
+    
+    <section class="testemunhos">
+        <div class="row justify-content-center">
+            <!-- Left Testimonial -->
+            <div class="col-md-4 d-flex justify-content-center mb-4 mb-md-0">
+                <div class="testimonial-card text-center">
+                    <p class="testimonial-text">
+                        "A violência nunca é a solução. Cada ato de agressão gera mais sofrimento e separação. Devemos buscar o diálogo e a compreensão para resolver nossos conflitos."
+                    </p>
+                    <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Maria" class="profile-img rounded-circle mb-3"/>
+                    <div class="testimonial-author fw-bold">Maria Silva</div>
+                    <div class="testimonial-role text-muted">Psicóloga</div>
                 </div>
             </div>
-        </section>
-    </div>
+
+            <!-- Center Testimonial (Highlighted) -->
+            <div class="col-md-4 d-flex justify-content-center mb-4 mb-md-0">
+                <div class="testimonial-card main text-center p-4 border border-3 rounded shadow-lg">
+                    <p class="testimonial-text">
+                        "Cresci em um ambiente violento e sei o quão devastador é viver com medo. A violência destrói vidas, enquanto o amor e a paz constroem futuros melhores."
+                    </p>
+                    <img src="https://randomuser.me/api/portraits/women/18.jpg" alt="Lucas" class="profile-img rounded-circle mb-3"/>
+                    <div class="testimonial-author fw-bold">Lucas Santos</div>
+                    <div class="testimonial-role text-muted">Educador</div>
+                </div>
+            </div>
+
+            <!-- Right Testimonial -->
+            <div class="col-md-4 d-flex justify-content-center mb-4 mb-md-0">
+                <div class="testimonial-card text-center">
+                    <p class="testimonial-text">
+                        "A violência nunca resolve os problemas; ao contrário, só agrava a situação. Devemos cultivar a empatia e a solidariedade para promover uma sociedade mais justa e pacífica."
+                    </p>
+                    <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Carlos" class="profile-img rounded-circle mb-3"/>
+                    <div class="testimonial-author fw-bold">Carlos Oliveira</div>
+                    <div class="testimonial-role text-muted">Ativista</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
 
     <?php include('includes/footer.php'); ?>
 

@@ -15,26 +15,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Verifica se o usuário existe e a senha é válida
-        if ($usuario && password_verify($senha, $usuario['senha'])) {
-            // Depuração - Verifique os valores
-            var_dump($usuario);  // Dados do usuário
-            var_dump($senha);     // Senha inserida
-            var_dump($usuario['senha']); // Senha armazenada no banco
+        if ($usuario) {
+            // Verifica se a senha fornecida corresponde à senha criptografada no banco de dados
+            if (password_verify($senha, $usuario['senha'])) {
+                // Se tudo estiver correto, cria a sessão
+                $_SESSION['user_id'] = $usuario['id'];
+                $_SESSION['user_nome'] = $nomeusuario;
+                $_SESSION['user_tipo'] = $usuario['tipo'];  // Salva o tipo do usuário na sessão
 
-            // Se tudo estiver correto, cria a sessão
-            $_SESSION['user_id'] = $usuario['id'];
-            $_SESSION['user_nome'] = $nomeusuario;
-            $_SESSION['user_tipo'] = $usuario['tipo'];  // Salva o tipo do usuário na sessão
-
-            // Verifica o tipo de usuário para redirecionamento
-            if ($usuario['tipo'] === 'admin') {
-                header("Location: admin/painel.php");  // Redireciona para o painel do admin
+                // Verifica o tipo de usuário para redirecionamento
+                if ($usuario['tipo'] === 'admin') {
+                    header("Location: admin/dashboard.php");  // Redireciona para o painel do admin
+                } else {
+                    header("Location: home.php");  // Redireciona para a home de usuário normal
+                }
+                exit;
             } else {
-                header("Location: home.php");  // Redireciona para a home de usuário normal
+                // Se a senha não corresponder, exibe a mensagem de erro
+                $erro = "Nome de usuário ou senha incorretos!";
             }
-            exit;
         } else {
-            // Caso haja erro, exibe a mensagem de erro
+            // Caso o usuário não seja encontrado
             $erro = "Nome de usuário ou senha incorretos!";
         }
     }

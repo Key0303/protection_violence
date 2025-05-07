@@ -773,9 +773,56 @@ footer {
     padding: 1rem 0;
   }
 }
-.Botão{
-  background: #942177;
-  width: 100px;
-  height: 50px;
-  border-radius: 10px;
+.Botão {
+    background-color: #D1A7F7; /* Cor lilás */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Cor quando o botão é clicado (estado ativo) */
+.Botão:active {
+    background-color: #D1A7F7; /* Continua lilás ao ser clicado */
+}
+
+/* Cor quando o botão recebe o foco (quando clicado ou selecionado com o teclado) */
+.Botão:focus {
+    outline: none;
+    background-color: #D1A7F7; /* Continua lilás no foco */
+}
+
+/* Cor do botão quando o cursor passa sobre ele (hover) */
+.Botão:hover {
+    background-color: #C38EEC; /* Um lilás mais escuro para o efeito de hover */
+}
+
+
+.testimonial-card.main {
+    background-color: #D8A7D1; /* Cor lilás */
+    color: #333; /* Cor do texto */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-card.main .testimonial-text {
+    font-style: italic;
+    color: #555;
+}
+
+.testimonial-card.main .testimonial-author {
+    font-weight: bold;
+    color: #333;
+}
+
+.testimonial-card.main .testimonial-role {
+    font-size: 0.9rem;
+    color: #777;
+}
+.swiper-pagination {
+    display: none;
 }

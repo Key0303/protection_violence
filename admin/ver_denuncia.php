@@ -4,7 +4,7 @@ include('includes/config.php');
 
 // Verifica se o usuário é admin
 if (!isset($_SESSION['user_id']) || $_SESSION['user_tipo'] !== 'admin') {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit;
 }
 
@@ -49,43 +49,66 @@ $provas = $stmt_provas->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <title>Ver Denúncia</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
+  
 </head>
 <body>
-    <div class="sidebar">
-        <h2>Admin Dashboard</h2>
-        <ul>
-            <li><a href="dashboard.php">Início</a></li>
-            <li><a href="categorias.php">Categorias</a></li>
-            <li><a href="usuarios.php">Usuários</a></li>
-            <li><a href="mensagens.php">Mensagens de Contato</a></li>
-            <li><a href="logout.php">Sair</a></li>
-        </ul>
-    </div>
+<?php include('includes/header.php') ?>
+<?php include('includes/sidebar.php') ?>
 
     <div class="main-content">
         <h1>Detalhes da Denúncia</h1>
-        <p><strong>Título:</strong> <?= htmlspecialchars($denuncia['titulo']) ?></p>
-        <p><strong>Descrição:</strong> <?= nl2br(htmlspecialchars($denuncia['descricao'])) ?></p>
-        <p><strong>Categoria:</strong> <?= htmlspecialchars($denuncia['categoria_nome']) ?></p>
-        <p><strong>Usuário:</strong> <?= htmlspecialchars($denuncia['usuario_nome']) ?></p>
-        <p><strong>Status:</strong> <?= ucfirst($denuncia['status']) ?></p>
-        <p><strong>Data:</strong> <?= date('d/m/Y H:i', strtotime($denuncia['data_criacao'])) ?></p>
 
+        <!-- Tabela para exibir os detalhes da denúncia -->
+        <table class="table-container">
+            <tr>
+                <th>Título</th>
+                <td><?= htmlspecialchars($denuncia['titulo']) ?></td>
+            </tr>
+            <tr>
+                <th>Descrição</th>
+                <td class="description"><?= nl2br(htmlspecialchars($denuncia['descricao'])) ?></td>
+            </tr>
+            <tr>
+                <th>Categoria</th>
+                <td><?= htmlspecialchars($denuncia['categoria_nome']) ?></td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td><?= ucfirst($denuncia['status']) ?></td>
+            </tr>
+            <tr>
+                <th>Data de Criação</th>
+                <td><?= date('d/m/Y H:i', strtotime($denuncia['data_criacao'])) ?></td>
+            </tr>
+            <tr>
+                <th>Nome do Usuário</th>
+                <td><?= htmlspecialchars($denuncia['usuario_nome']) ?></td>
+            </tr>
+        </table>
+
+        <!-- Tabela para exibir provas anexadas -->
         <h2>Provas Anexadas</h2>
         <?php if (count($provas) > 0): ?>
-            <ul>
-                <?php foreach ($provas as $prova): ?>
-                    <li>
-                        <a href="<?= htmlspecialchars($prova['caminho_arquivo']) ?>" target="_blank">Ver Arquivo</a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+            <table class="table-container">
+                <thead>
+                    <tr>
+                        <th>Nome do Arquivo</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($provas as $prova): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($prova['nome_arquivo']) ?></td>
+                            <td><a href="<?= htmlspecialchars($prova['caminho_arquivo']) ?>" target="_blank">Ver Arquivo</a></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         <?php else: ?>
             <p>Nenhuma prova foi anexada.</p>
         <?php endif; ?>
-
-        <p><a href="dashboard.php">← Voltar para o painel</a></p>
     </div>
 </body>
 </html>
