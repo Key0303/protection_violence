@@ -9,10 +9,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_tipo'] !== 'admin') {
 }
 
 // Buscar todas as denúncias
-$stmt_denuncias = $conexao->prepare("SELECT d.id, d.titulo, d.status, u.nome AS usuario_nome, c.nome AS categoria_nome
-                                    FROM denuncias d
-                                    JOIN usuarios u ON d.usuario_id = u.id
-                                    JOIN categorias c ON d.categoria_id = c.id");
+$stmt_denuncias = $conexao->prepare("SELECT d.id, d.titulo, d.status, u.nome AS usuario_nome, c.nome AS categoria_nome FROM denuncias d JOIN usuarios u ON d.usuario_id = u.idJOIN categorias c ON d.categoria_id = c.id");
 $stmt_denuncias->execute();
 $denuncias = $stmt_denuncias->fetchAll(PDO::FETCH_ASSOC);
 
